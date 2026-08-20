@@ -1,4 +1,4 @@
-name: Build HDang Dynamic
+name: Build
 
 on: [push, workflow_dispatch]
 
@@ -12,7 +12,6 @@ jobs:
     - name: Install Dependencies
       run: |
         brew install ldid dpkg
-        sudo easy_install pip
     
     - name: Clone Theos
       run: |
@@ -33,7 +32,7 @@ jobs:
         export PATH=$PATH:/opt/theos/bin
         make package
     
-    - name: Upload .deb
+    - name: Upload
       uses: actions/upload-artifact@v4
       with:
         name: HDangDynamic
