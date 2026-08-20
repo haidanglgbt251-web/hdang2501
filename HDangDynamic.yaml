@@ -1,0 +1,40 @@
+tweak:
+  name: "HDang Dynamic"
+  package: "com.hdang.dynamic"
+  version: "1.0.0"
+  author: "HDang"
+  description: "Dynamic Island cho iOS 14-15.8.8"
+  features:
+    dynamic_island:
+      enabled: true
+      show_on_lockscreen: true
+      prevent_touch_loss: true
+      always_visible: true
+    display:
+      camera_dot: true
+      sensor_dot: true
+    gestures:
+      tap_to_expand: true
+      long_press_expand: true
+      haptic_feedback: true
+    music:
+      enabled: true
+      show_album_art: true
+      show_progress: true
+    call:
+      enabled: true
+      show_caller_name: true
+    battery:
+      enabled: true
+      show_percentage: true
+      low_battery_alert: true
+  animations:
+    spring_damping: 0.8
+    duration: 0.3
+  dimensions:
+    original_width: 120
+    original_height: 35
+  compatibility:
+    ios_versions:
+      - "14.0"
+      - "15.8.8"
