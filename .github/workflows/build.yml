@@ -1,57 +1,39 @@
-name: Build
+name: Build HDang Dynamic
 
 on: [push, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     
     steps:
     - uses: actions/checkout@v2
     
     - name: Install Dependencies
       run: |
-        sudo apt update
-        sudo apt install -y git make clang perl dpkg wget xz-utils pkg-config \
-          libplist-dev libplist++-dev libplist-utils libssl-dev libcrypto++-dev libz-dev
-    
-    - name: Build ldid from source
-      run: |
-        git clone https://github.com/ProcursusTeam/ldid.git
-        cd ldid
-        make
-        sudo make install
-        cd ..
+        brew install ldid dpkg
+        sudo easy_install pip
     
     - name: Clone Theos
       run: |
-        sudo git clone --recursive https://github.com/theos/theos.git /opt/theos
+        git clone --recursive https://github.com/theos/theos.git /opt/theos
         sudo chmod -R 755 /opt/theos
     
-    - name: Download SDK (clone repo)
+    - name: Download SDK
       run: |
-        sudo mkdir -p /opt/theos/sdks
+        mkdir -p /opt/theos/sdks
         cd /opt/theos/sdks
-        sudo git clone --depth 1 https://github.com/xybp888/iOS-SDKs.git
-        # Copy SDK 14.5, nếu không có thì thử 15.0
-        if [ -d "iOS-SDKs/iPhoneOS14.5.sdk" ]; then
-          sudo cp -r iOS-SDKs/iPhoneOS14.5.sdk .
-        elif [ -d "iOS-SDKs/iPhoneOS15.0.sdk" ]; then
-          sudo cp -r iOS-SDKs/iPhoneOS15.0.sdk .
-        else
-          echo "Khong tim thay SDK phu hop"
-          ls iOS-SDKs
-          exit 1
-        fi
-        sudo rm -rf iOS-SDKs
+        wget https://github.com/xybp888/iOS-SDKs/releases/download/iOS-14.5-SDK/iPhoneOS14.5.sdk.tar.xz
+        tar -xf iPhoneOS14.5.sdk.tar.xz
         ls -la
     
     - name: Build Tweak
       run: |
         export THEOS=/opt/theos
+        export PATH=$PATH:/opt/theos/bin
         make package
     
-    - name: Upload
+    - name: Upload .deb
       uses: actions/upload-artifact@v4
       with:
         name: HDangDynamic
