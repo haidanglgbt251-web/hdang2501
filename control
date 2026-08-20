@@ -1,0 +1,9 @@
+Package: com.hdang.dynamic
+Name: HDang Dynamic
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Dynamic Island for iOS 14-15.8.8
+Maintainer: HDang
+Author: HDang
+Section: Tweaks
+Depends: mobilesubstrate, preferenceloader
