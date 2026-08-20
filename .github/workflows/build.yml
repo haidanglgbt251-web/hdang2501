@@ -17,12 +17,24 @@ jobs:
       run: |
         git clone --recursive https://github.com/theos/theos.git $HOME/theos
     
-    - name: Download SDK
+    - name: Download SDK (clone repo)
       run: |
         mkdir -p $HOME/theos/sdks
         cd $HOME/theos/sdks
-        wget https://github.com/xybp888/iOS-SDKs/releases/download/iOS-14.5-SDK/iPhoneOS14.5.sdk.tar.xz
-        tar -xf iPhoneOS14.5.sdk.tar.xz
+        git clone --depth 1 https://github.com/xybp888/iOS-SDKs.git
+        # Tự động tìm SDK phù hợp
+        if [ -d "iOS-SDKs/iPhoneOS14.5.sdk" ]; then
+          cp -r iOS-SDKs/iPhoneOS14.5.sdk .
+        elif [ -d "iOS-SDKs/iPhoneOS15.0.sdk" ]; then
+          cp -r iOS-SDKs/iPhoneOS15.0.sdk .
+        elif [ -d "iOS-SDKs/iPhoneOS15.5.sdk" ]; then
+          cp -r iOS-SDKs/iPhoneOS15.5.sdk .
+        else
+          echo "Danh sách SDK có sẵn:"
+          ls iOS-SDKs/
+          exit 1
+        fi
+        rm -rf iOS-SDKs
         ls -la
     
     - name: Build Tweak
