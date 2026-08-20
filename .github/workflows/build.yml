@@ -1,0 +1,38 @@
+name: Build HDang Dynamic
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Install Theos
+      run: |
+        sudo apt update
+        sudo apt install -y git make clang ldid perl dpkg wget xz-utils
+        git clone --recursive https://github.com/theos/theos.git /opt/theos
+    
+    - name: Download SDK
+      run: |
+        mkdir -p /opt/theos/sdks
+        cd /opt/theos/sdks
+        wget https://github.com/theos/sdks/releases/download/14.5/iPhoneOS14.5.sdk.tar.xz
+        tar -xf iPhoneOS14.5.sdk.tar.xz
+    
+    - name: Build Tweak
+      run: |
+        export THEOS=/opt/theos
+        make package
+    
+    - name: Upload .deb file
+      uses: actions/upload-artifact@v4
+      with:
+        name: HDangDynamic
+        path: packages/*.deb
