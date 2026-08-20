@@ -23,13 +23,13 @@
         self.isExpanded = NO;
         self.clipsToBounds = YES;
         
-        // Camera dot (chấm nhỏ trang trí)
+        // Camera dot
         self.cameraDot = [[UIView alloc] initWithFrame:CGRectMake(frame.size.width - 22, frame.size.height/2 - 6, 12, 12)];
         self.cameraDot.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0];
         self.cameraDot.layer.cornerRadius = 6;
         [self addSubview:self.cameraDot];
         
-        // Thêm gestures
+        // Gestures
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap)];
         [self addGestureRecognizer:tap];
         
@@ -102,20 +102,19 @@
 %new
 - (void)setupHDangDynamicWindow {
     static UIWindow *dynamicWindow = nil;
-    if (dynamicWindow) return; // tránh tạo trùng
+    if (dynamicWindow) return;
 
     // Kích thước cho iPhone 6s Plus (414x736)
     CGFloat screenWidth = 414;
-    CGFloat screenHeight = 736;
+    // Đã bỏ screenHeight vì không cần dùng
     CGFloat islandWidth = 125;
     CGFloat islandHeight = 34;
     CGFloat islandY = 20; // dưới status bar
 
     CGRect frame = CGRectMake(screenWidth/2 - islandWidth/2, islandY, islandWidth, islandHeight);
 
-    // Tạo UIWindow riêng nổi trên tất cả
     dynamicWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    dynamicWindow.windowLevel = UIWindowLevelAlert + 1; // nổi trên màn hình khóa
+    dynamicWindow.windowLevel = UIWindowLevelAlert + 1;
     dynamicWindow.backgroundColor = [UIColor clearColor];
     dynamicWindow.rootViewController = [UIViewController new];
     dynamicWindow.rootViewController.view.backgroundColor = [UIColor clearColor];
