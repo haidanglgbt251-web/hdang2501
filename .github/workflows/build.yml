@@ -12,7 +12,8 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt update
-        sudo apt install -y git make clang perl dpkg wget xz-utils openssl libssl-dev
+        sudo apt install -y git make clang perl dpkg wget xz-utils pkg-config \
+          libplist-dev libplist++-dev libplist-utils libssl-dev libcrypto++-dev libz-dev
     
     - name: Build ldid from source
       run: |
