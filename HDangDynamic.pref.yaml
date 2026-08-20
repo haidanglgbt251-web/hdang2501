@@ -1,0 +1,28 @@
+preferences:
+  bundle_id: "com.hdang.dynamic"
+  sections:
+    - title: "HDang Dynamic Settings"
+    - title: "General"
+      items:
+        - type: "switch"
+          key: "enabled"
+          default: true
+          label: "Enable Tweak"
+        - type: "switch"
+          key: "show_on_lockscreen"
+          default: true
+          label: "Show on Lockscreen"
+    - title: "Features"
+      items:
+        - type: "switch"
+          key: "music_integration"
+          default: true
+          label: "Music Controls"
+        - type: "switch"
+          key: "call_integration"
+          default: true
+          label: "Call Notifications"
+        - type: "switch"
+          key: "battery_integration"
+          default: true
+          label: "Battery Display"
