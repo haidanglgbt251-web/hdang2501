@@ -28,12 +28,22 @@ jobs:
         sudo git clone --recursive https://github.com/theos/theos.git /opt/theos
         sudo chmod -R 755 /opt/theos
     
-    - name: Download SDK from xybp888
+    - name: Download SDK (clone repo)
       run: |
         sudo mkdir -p /opt/theos/sdks
         cd /opt/theos/sdks
-        sudo wget https://github.com/xybp888/iOS-SDKs/releases/download/iOS-14.5-SDK/iPhoneOS14.5.sdk.tar.xz
-        sudo tar -xf iPhoneOS14.5.sdk.tar.xz
+        sudo git clone --depth 1 https://github.com/xybp888/iOS-SDKs.git
+        # Copy SDK 14.5, nếu không có thì thử 15.0
+        if [ -d "iOS-SDKs/iPhoneOS14.5.sdk" ]; then
+          sudo cp -r iOS-SDKs/iPhoneOS14.5.sdk .
+        elif [ -d "iOS-SDKs/iPhoneOS15.0.sdk" ]; then
+          sudo cp -r iOS-SDKs/iPhoneOS15.0.sdk .
+        else
+          echo "Khong tim thay SDK phu hop"
+          ls iOS-SDKs
+          exit 1
+        fi
+        sudo rm -rf iOS-SDKs
         ls -la
     
     - name: Build Tweak
