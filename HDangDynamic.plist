@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>items</key>
+    <array>
+        <dict>
+            <key>cell</key>
+            <string>PSGroupCell</string>
+            <key>label</key>
+            <string>HDang Dynamic Settings</string>
+        </dict>
+        <dict>
+            <key>cell</key>
+            <string>PSSwitchCell</string>
+            <key>default</key>
+            <true/>
+            <key>defaults</key>
+            <string>com.hdang.dynamic</string>
+            <key>key</key>
+            <string>enabled</string>
+            <key>label</key>
+            <string>Enable HDang Dynamic</string>
+        </dict>
+        <dict>
+            <key>cell</key>
+            <string>PSSwitchCell</string>
+            <key>default</key>
+            <true/>
+            <key>defaults</key>
+            <string>com.hdang.dynamic</string>
+            <key>key</key>
+            <string>showOnLockscreen</string>
+            <key>label</key>
+            <string>Show on Lockscreen</string>
+        </dict>
+        <dict>
+            <key>cell</key>
+            <string>PSSwitchCell</string>
+            <key>default</key>
+            <true/>
+            <key>defaults</key>
+            <string>com.hdang.dynamic</string>
+            <key>key</key>
+            <string>musicIntegration</string>
+            <key>label</key>
+            <string>Music Controls</string>
+        </dict>
+        <dict>
+            <key>cell</key>
+            <string>PSSwitchCell</string>
+            <key>default</key>
+            <true/>
+            <key>defaults</key>
+            <string>com.hdang.dynamic</string>
+            <key>key</key>
+            <string>callIntegration</string>
+            <key>label</key>
+            <string>Call Notifications</string>
+        </dict>
+        <dict>
+            <key>cell</key>
+            <string>PSSwitchCell</string>
+            <key>default</key>
+            <true/>
+            <key>defaults</key>
+            <string>com.hdang.dynamic</string>
+            <key>key</key>
+            <string>batteryIntegration</string>
+            <key>label</key>
+            <string>Battery Display</string>
+        </dict>
+    </array>
+    <key>title</key>
+    <string>HDang Dynamic</string>
+</dict>
+</plist>
