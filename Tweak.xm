@@ -6,6 +6,13 @@
 @interface SBLockScreenWindow : UIWindow
 @end
 
+// Category khai báo selector cho SpringBoard
+@interface SpringBoard (HDangDynamic)
+- (void)setupDynamicIslandInAllWindows;
+- (void)windowDidBecomeVisible:(NSNotification *)notification;
+@end
+
+// View Dynamic Island
 @interface HDangDynamicView : UIView
 @property (nonatomic, assign) BOOL isExpanded;
 @property (nonatomic, assign) CGFloat originalWidth;
@@ -121,7 +128,7 @@
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat islandWidth = self.originalWidth;
     CGFloat islandHeight = self.originalHeight;
-    CGFloat islandY = self.frame.origin.y; // Giữ nguyên vị trí y đã set ban đầu
+    CGFloat islandY = self.frame.origin.y;
     
     [UIView animateWithDuration:0.35
                           delay:0
@@ -195,7 +202,6 @@
         [self setupDynamicIslandInAllWindows];
     });
     
-    // Đăng ký notification để thêm view khi lockscreen xuất hiện
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(windowDidBecomeVisible:)
                                                  name:@"UIWindowDidBecomeVisibleNotification"
@@ -249,7 +255,6 @@
         }
     }
     
-    // Tạo frame cho view
     CGRect islandFrame = CGRectMake(screenWidth/2 - islandWidth/2, islandY, islandWidth, islandHeight);
     
     // Thêm vào key window (màn hình chính)
